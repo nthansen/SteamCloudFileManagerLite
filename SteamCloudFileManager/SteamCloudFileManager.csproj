@@ -22,11 +22,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Steamworks.NET">
-      <HintPath>..\Steamworks.NET\Windows-x64\Steamworks.NET.dll</HintPath>
+      <HintPath>libs\Steamworks.NET\2024.8.0\Steamworks.NET.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="libs\Steamworks.NET\steam_api64.dll" Link="steam_api64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libs\Steamworks.NET\Steamworks.NET.dll" Link="Steamworks.NET.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
