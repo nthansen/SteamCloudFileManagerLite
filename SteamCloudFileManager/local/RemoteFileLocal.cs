@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
+using SteamCloudFileManager.interfaces;
 using Steamworks;
 
-namespace SteamCloudFileManager
+namespace SteamCloudFileManager.local
 {
     class RemoteFileLocal : IRemoteFile
     {

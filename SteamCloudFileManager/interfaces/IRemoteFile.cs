@@ -1,7 +1,7 @@
 ﻿using System;
 using Steamworks;
 
-namespace SteamCloudFileManager
+namespace SteamCloudFileManager.interfaces
 {
     interface IRemoteFile
     {

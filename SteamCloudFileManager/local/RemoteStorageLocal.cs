@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using SteamCloudFileManager.interfaces;
 
-namespace SteamCloudFileManager
+namespace SteamCloudFileManager.local
 {
     /// <summary>
     /// Dummy local implementation of RemoteStorage interface for offline testing
@@ -11,7 +12,7 @@ namespace SteamCloudFileManager
     {
         string basePath;
         uint appId;
-        
+
         public RemoteStorageLocal(string basePath, uint appId)
         {
             this.basePath = basePath;

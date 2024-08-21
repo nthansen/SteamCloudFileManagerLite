@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
+using SteamCloudFileManager.interfaces;
+using System.Runtime.Versioning;
 
 namespace SteamCloudFileManager
 {
@@ -168,7 +170,7 @@ namespace SteamCloudFileManager
                     if (!file.WriteAllBytes(data))
                         failedFiles.Add(uploadItem.Item1);
                 }
-                catch (IOException ex)
+                catch (IOException)
                 {
                     failedFiles.Add(uploadItem.Item1);
                 }
