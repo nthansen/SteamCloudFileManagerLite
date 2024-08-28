@@ -109,7 +109,7 @@ namespace SteamCloudFileManager
                     instance = null;
                 }
 
-                RemoteStorage rs = new RemoteStorage(appID);
+                RemoteStorage rs = new (appID);
                 instance = rs;
                 return rs;
             }

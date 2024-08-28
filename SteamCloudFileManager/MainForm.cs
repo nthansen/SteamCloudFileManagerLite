@@ -4,7 +4,13 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
 using SteamCloudFileManager.interfaces;
-using System.Runtime.Versioning;
+using Narod.SteamGameFinder;
+using System.Linq;
+using Steamworks;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Xml.Linq;
+
 
 namespace SteamCloudFileManager
 {
@@ -14,9 +20,16 @@ namespace SteamCloudFileManager
         // Item1 = cloud name, Item2 = path on disk
         Queue<Tuple<string, string>> uploadQueue = new Queue<Tuple<string, string>>();
 
+        List<SteamApp> cachedSteamAppList = null;
+        readonly SteamGameLocator locator;
+        readonly HttpClient httpClient;
+
+
         public MainForm()
         {
             InitializeComponent();
+            locator = new SteamGameLocator();
+            httpClient = new HttpClient();
         }
 
         private void connectButton_Click(object sender, EventArgs e)
@@ -224,5 +237,83 @@ namespace SteamCloudFileManager
             enableUploadGui();
             refreshButton_Click(this, EventArgs.Empty);
         }
+
+        private void loadUserProfilesButton_Click(object sender, EventArgs e)
+        {
+            var steamGameLocator = new SteamGameLocator();
+            var installLocation = steamGameLocator.getSteamInstallLocation();
+            if (string.IsNullOrWhiteSpace(installLocation))
+            {
+                MessageBox.Show(this, "Unable to get Steam install location", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            userProfileList.DataSource = Directory.EnumerateDirectories($"{installLocation}\\userdata\\")
+                                               .Select(dir => Path.GetFileName(dir))
+                                               .ToList();
+            userProfileList.Update();
+        }
+
+        private void userProfileList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gamesList.DataSource = null;
+            gamesList.Update();
+        }
+
+        private async void loadLocalGamesButton_Click(object sender, EventArgs e)
+        {
+            var installLocation = locator.getSteamInstallLocation();
+            if (string.IsNullOrWhiteSpace(installLocation))
+            {
+                MessageBox.Show(this, "Unable to get Steam install location", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var localAppIds = Directory.EnumerateDirectories($"{installLocation}\\userdata\\{userProfileList.SelectedValue}")
+                                               .Select(dir => Path.GetFileName(dir))
+                                               .ToList();
+
+            if (cachedSteamAppList is null)
+            {
+                var remoteAppList = await httpClient.GetFromJsonAsync<SteamAppList>("https://api.steampowered.com/ISteamApps/GetAppList/v0002/");
+                if (remoteAppList?.applist?.apps != null)
+                {
+                    cachedSteamAppList = remoteAppList.applist.apps;
+                }
+            }
+
+            var matchingSteamApps = new List<SteamApp>();
+
+            foreach (var localAppId in localAppIds)
+            {
+                var remoteAppSearchResult = cachedSteamAppList.FirstOrDefault(x => x.appid.ToString() == localAppId);
+                if (remoteAppSearchResult is not null)
+                {
+                    matchingSteamApps.Add(remoteAppSearchResult);
+                }
+            }
+
+
+            gamesList.DataSource = matchingSteamApps;
+            gamesList.Update();
+        }
+
+        private void gamesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (gamesList.SelectedItem is SteamApp selectedApp)
+            {
+                appIdTextBox.Text = selectedApp.appid.ToString();
+                appIdTextBox.Update();
+            }
+        }
     }
 }
+
+record SteamApp(uint appid, string name)
+{
+    public override string ToString() => name;
+};
+
+record Applist(List<SteamApp> apps);
+
+record SteamAppList(Applist applist);

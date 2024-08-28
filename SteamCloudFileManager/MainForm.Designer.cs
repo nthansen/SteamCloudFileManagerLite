@@ -29,186 +29,245 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.remoteListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
-            this.appIdTextBox = new System.Windows.Forms.TextBox();
-            this.connectButton = new System.Windows.Forms.Button();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.quotaLabel = new System.Windows.Forms.Label();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.uploadButton = new System.Windows.Forms.Button();
-            this.uploadBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.SuspendLayout();
+            remoteListView = new System.Windows.Forms.ListView();
+            columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            label1 = new System.Windows.Forms.Label();
+            appIdTextBox = new System.Windows.Forms.TextBox();
+            connectButton = new System.Windows.Forms.Button();
+            refreshButton = new System.Windows.Forms.Button();
+            quotaLabel = new System.Windows.Forms.Label();
+            deleteButton = new System.Windows.Forms.Button();
+            downloadButton = new System.Windows.Forms.Button();
+            saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            uploadButton = new System.Windows.Forms.Button();
+            uploadBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            loadUserProfilesButton = new System.Windows.Forms.Button();
+            userProfileList = new System.Windows.Forms.ComboBox();
+            loadLocalGamesButton = new System.Windows.Forms.Button();
+            gamesList = new System.Windows.Forms.ComboBox();
+            SuspendLayout();
             // 
             // remoteListView
             // 
-            this.remoteListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.remoteListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.remoteListView.FullRowSelect = true;
-            this.remoteListView.HideSelection = false;
-            this.remoteListView.Location = new System.Drawing.Point(15, 41);
-            this.remoteListView.Name = "remoteListView";
-            this.remoteListView.Size = new System.Drawing.Size(591, 185);
-            this.remoteListView.TabIndex = 0;
-            this.remoteListView.UseCompatibleStateImageBehavior = false;
-            this.remoteListView.View = System.Windows.Forms.View.Details;
-            this.remoteListView.SelectedIndexChanged += new System.EventHandler(this.remoteListView_SelectedIndexChanged);
+            remoteListView.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            remoteListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
+            remoteListView.FullRowSelect = true;
+            remoteListView.Location = new System.Drawing.Point(18, 47);
+            remoteListView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            remoteListView.Name = "remoteListView";
+            remoteListView.Size = new System.Drawing.Size(1075, 369);
+            remoteListView.TabIndex = 0;
+            remoteListView.UseCompatibleStateImageBehavior = false;
+            remoteListView.View = System.Windows.Forms.View.Details;
+            remoteListView.SelectedIndexChanged += remoteListView_SelectedIndexChanged;
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 196;
+            columnHeader1.Text = "Name";
+            columnHeader1.Width = 196;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Timestamp";
-            this.columnHeader2.Width = 161;
+            columnHeader2.Text = "Timestamp";
+            columnHeader2.Width = 161;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Size";
+            columnHeader3.Text = "Size";
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Is Persisted";
+            columnHeader4.Text = "Is Persisted";
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Exists";
+            columnHeader5.Text = "Exists";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "AppID:";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(14, 20);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(43, 15);
+            label1.TabIndex = 1;
+            label1.Text = "AppID:";
             // 
             // appIdTextBox
             // 
-            this.appIdTextBox.Location = new System.Drawing.Point(58, 14);
-            this.appIdTextBox.Name = "appIdTextBox";
-            this.appIdTextBox.Size = new System.Drawing.Size(100, 20);
-            this.appIdTextBox.TabIndex = 2;
+            appIdTextBox.Location = new System.Drawing.Point(68, 16);
+            appIdTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            appIdTextBox.Name = "appIdTextBox";
+            appIdTextBox.Size = new System.Drawing.Size(116, 23);
+            appIdTextBox.TabIndex = 2;
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(164, 12);
-            this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(75, 23);
-            this.connectButton.TabIndex = 3;
-            this.connectButton.Text = "Connect";
-            this.connectButton.UseVisualStyleBackColor = true;
-            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
+            connectButton.Location = new System.Drawing.Point(191, 14);
+            connectButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            connectButton.Name = "connectButton";
+            connectButton.Size = new System.Drawing.Size(88, 27);
+            connectButton.TabIndex = 3;
+            connectButton.Text = "Connect";
+            connectButton.UseVisualStyleBackColor = true;
+            connectButton.Click += connectButton_Click;
             // 
             // refreshButton
             // 
-            this.refreshButton.Enabled = false;
-            this.refreshButton.Location = new System.Drawing.Point(245, 12);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(75, 23);
-            this.refreshButton.TabIndex = 4;
-            this.refreshButton.Text = "Refresh";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            refreshButton.Enabled = false;
+            refreshButton.Location = new System.Drawing.Point(286, 14);
+            refreshButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new System.Drawing.Size(88, 27);
+            refreshButton.TabIndex = 4;
+            refreshButton.Text = "Refresh";
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += refreshButton_Click;
             // 
             // quotaLabel
             // 
-            this.quotaLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.quotaLabel.Location = new System.Drawing.Point(326, 9);
-            this.quotaLabel.Name = "quotaLabel";
-            this.quotaLabel.Size = new System.Drawing.Size(280, 23);
-            this.quotaLabel.TabIndex = 5;
-            this.quotaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            quotaLabel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            quotaLabel.Location = new System.Drawing.Point(380, 10);
+            quotaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            quotaLabel.Name = "quotaLabel";
+            quotaLabel.Size = new System.Drawing.Size(713, 27);
+            quotaLabel.TabIndex = 5;
+            quotaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // deleteButton
             // 
-            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deleteButton.Enabled = false;
-            this.deleteButton.Location = new System.Drawing.Point(93, 232);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 6;
-            this.deleteButton.Text = "Delete";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            deleteButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            deleteButton.Enabled = false;
+            deleteButton.Location = new System.Drawing.Point(108, 424);
+            deleteButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            deleteButton.Name = "deleteButton";
+            deleteButton.Size = new System.Drawing.Size(88, 27);
+            deleteButton.TabIndex = 6;
+            deleteButton.Text = "Delete";
+            deleteButton.UseVisualStyleBackColor = true;
+            deleteButton.Click += deleteButton_Click;
             // 
             // downloadButton
             // 
-            this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.downloadButton.Enabled = false;
-            this.downloadButton.Location = new System.Drawing.Point(12, 232);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(75, 23);
-            this.downloadButton.TabIndex = 7;
-            this.downloadButton.Text = "Download";
-            this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+            downloadButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            downloadButton.Enabled = false;
+            downloadButton.Location = new System.Drawing.Point(14, 424);
+            downloadButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            downloadButton.Name = "downloadButton";
+            downloadButton.Size = new System.Drawing.Size(88, 27);
+            downloadButton.TabIndex = 7;
+            downloadButton.Text = "Download";
+            downloadButton.UseVisualStyleBackColor = true;
+            downloadButton.Click += downloadButton_Click;
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.Filter = "All files|*";
-            this.saveFileDialog1.Title = "Save remote file as...";
+            saveFileDialog1.Filter = "All files|*";
+            saveFileDialog1.Title = "Save remote file as...";
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Multiselect = true;
-            this.openFileDialog1.Title = "Select files to upload";
+            openFileDialog1.Multiselect = true;
+            openFileDialog1.Title = "Select files to upload";
             // 
             // uploadButton
             // 
-            this.uploadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.uploadButton.Enabled = false;
-            this.uploadButton.Location = new System.Drawing.Point(174, 232);
-            this.uploadButton.Name = "uploadButton";
-            this.uploadButton.Size = new System.Drawing.Size(75, 23);
-            this.uploadButton.TabIndex = 8;
-            this.uploadButton.Text = "Upload";
-            this.uploadButton.UseVisualStyleBackColor = true;
-            this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
+            uploadButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            uploadButton.Enabled = false;
+            uploadButton.Location = new System.Drawing.Point(203, 424);
+            uploadButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            uploadButton.Name = "uploadButton";
+            uploadButton.Size = new System.Drawing.Size(88, 27);
+            uploadButton.TabIndex = 8;
+            uploadButton.Text = "Upload";
+            uploadButton.UseVisualStyleBackColor = true;
+            uploadButton.Click += uploadButton_Click;
             // 
             // uploadBackgroundWorker
             // 
-            this.uploadBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.uploadBackgroundWorker_DoWork);
-            this.uploadBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.uploadBackgroundWorker_RunWorkerCompleted);
+            uploadBackgroundWorker.DoWork += uploadBackgroundWorker_DoWork;
+            uploadBackgroundWorker.RunWorkerCompleted += uploadBackgroundWorker_RunWorkerCompleted;
+            // 
+            // loadUserProfilesButton
+            // 
+            loadUserProfilesButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            loadUserProfilesButton.Location = new System.Drawing.Point(520, 16);
+            loadUserProfilesButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            loadUserProfilesButton.Name = "loadUserProfilesButton";
+            loadUserProfilesButton.Size = new System.Drawing.Size(120, 27);
+            loadUserProfilesButton.TabIndex = 9;
+            loadUserProfilesButton.Text = "Load User Profiles";
+            loadUserProfilesButton.UseVisualStyleBackColor = true;
+            loadUserProfilesButton.Click += loadUserProfilesButton_Click;
+            // 
+            // userProfileList
+            // 
+            userProfileList.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            userProfileList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            userProfileList.FormattingEnabled = true;
+            userProfileList.Items.AddRange(new object[] { "test", "test1", "test2", "test3", "test4" });
+            userProfileList.Location = new System.Drawing.Point(648, 17);
+            userProfileList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            userProfileList.Name = "userProfileList";
+            userProfileList.Size = new System.Drawing.Size(178, 23);
+            userProfileList.TabIndex = 10;
+            userProfileList.SelectedIndexChanged += userProfileList_SelectedIndexChanged;
+            // 
+            // loadLocalGamesButton
+            // 
+            loadLocalGamesButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            loadLocalGamesButton.Location = new System.Drawing.Point(590, 424);
+            loadLocalGamesButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            loadLocalGamesButton.Name = "loadLocalGamesButton";
+            loadLocalGamesButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            loadLocalGamesButton.Size = new System.Drawing.Size(120, 27);
+            loadLocalGamesButton.TabIndex = 11;
+            loadLocalGamesButton.Text = "Load Local Games";
+            loadLocalGamesButton.UseVisualStyleBackColor = true;
+            loadLocalGamesButton.Click += loadLocalGamesButton_Click;
+            // 
+            // gamesList
+            // 
+            gamesList.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            gamesList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            gamesList.FormattingEnabled = true;
+            gamesList.Items.AddRange(new object[] { "test", "test1", "test2", "test3", "test4" });
+            gamesList.Location = new System.Drawing.Point(718, 424);
+            gamesList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gamesList.Name = "gamesList";
+            gamesList.Size = new System.Drawing.Size(374, 23);
+            gamesList.TabIndex = 12;
+            gamesList.SelectedIndexChanged += gamesList_SelectedIndexChanged;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 267);
-            this.Controls.Add(this.uploadButton);
-            this.Controls.Add(this.downloadButton);
-            this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.remoteListView);
-            this.Controls.Add(this.quotaLabel);
-            this.Controls.Add(this.refreshButton);
-            this.Controls.Add(this.connectButton);
-            this.Controls.Add(this.appIdTextBox);
-            this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
-            this.Text = "Steam Cloud File Manager";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1107, 464);
+            Controls.Add(gamesList);
+            Controls.Add(loadLocalGamesButton);
+            Controls.Add(userProfileList);
+            Controls.Add(loadUserProfilesButton);
+            Controls.Add(uploadButton);
+            Controls.Add(downloadButton);
+            Controls.Add(deleteButton);
+            Controls.Add(remoteListView);
+            Controls.Add(quotaLabel);
+            Controls.Add(refreshButton);
+            Controls.Add(connectButton);
+            Controls.Add(appIdTextBox);
+            Controls.Add(label1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "MainForm";
+            Text = "Steam Cloud File Manager";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -230,6 +289,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button uploadButton;
         private System.ComponentModel.BackgroundWorker uploadBackgroundWorker;
+        private System.Windows.Forms.Button loadUserProfilesButton;
+        private System.Windows.Forms.ComboBox userProfileList;
+        private System.Windows.Forms.Button loadLocalGamesButton;
+        private System.Windows.Forms.ComboBox gamesList;
     }
 }
 
